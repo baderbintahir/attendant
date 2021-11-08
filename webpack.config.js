@@ -19,11 +19,15 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: 'ts-loader'
-      }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ]
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: [ '.tsx', '.ts', '.js', '.css' ],
   },
   plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'index.html') })]
 };

@@ -1,7 +1,11 @@
 import * as React from "react";
+import Table from "./components/Table/Table";
+import './App.css'
 
-type AppProps = { num: number };
-
-export const App = ({ num }: AppProps) => (
-  <h1>Hello world React! Num: {num}</h1>
+const App = () => (
+  <div className="App">
+    <Table />
+  </div>
 );
+
+export default App
