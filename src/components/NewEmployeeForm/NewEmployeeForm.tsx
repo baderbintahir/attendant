@@ -2,6 +2,7 @@ import * as React from "react";
 import "./NewEmployeeForm.css";
 
 export type EmployeeType = {
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -12,11 +13,12 @@ export type EmployeeType = {
 
 type Prop = {
   handleSubmit: (employee: Partial<EmployeeType>) => void;
+  editEmployeeInfo: {}
 };
 
 const NewEmployeeForm = (props: Prop) => {
   const [newEmployee, setNewEmployee] = React.useState<Partial<EmployeeType>>(
-    {}
+    props.editEmployeeInfo
   );
 
   return (

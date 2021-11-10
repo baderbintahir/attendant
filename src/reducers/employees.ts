@@ -6,8 +6,9 @@ type Action = { type: string; payload: any}
 const employees = (employees: Employee = [], action: Action) => {
     switch (action.type) {
         case FETCH_ALL_EMPLOYEES:
+            return action.payload.employees;
         case CREATE_EMPLOYEE:
-            return action.payload;
+            return [...employees, action.payload];
         case UPDATE_EMPLOYEE:
             return employees.map(employee => employee._id === action.payload._id ? action.payload : employee)
         case DELETE_EMPLOYEE:
