@@ -1,11 +1,21 @@
 import * as React from "react";
+import { useDispatch } from "react-redux";
 import Table from "./components/Table/Table";
-import './App.css'
+import "./App.css";
+import { getEmployees } from "./actions/employees";
 
-const App = () => (
-  <div className="App">
-    <Table />
-  </div>
-);
+const App = () => {
+  const dispatch = useDispatch()
 
-export default App
+  React.useEffect(() => {
+    dispatch(getEmployees())
+  }, []);
+
+  return (
+    <div className="App">
+      <Table />
+    </div>
+  );
+};
+
+export default App;

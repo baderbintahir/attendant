@@ -1,10 +1,11 @@
-import { FETCH_ALL_EMPLOYEES, CREATE_EMPLOYEE, UPDATE_EMPLOYEE, DELETE_EMPLOYEE } from '../constants/actionTypes.js'
+import { FETCH_ALL_EMPLOYEES, CREATE_EMPLOYEE, UPDATE_EMPLOYEE, DELETE_EMPLOYEE } from '../constants/actionTypes'
 import * as api from '../api'
+import { EmployeeType } from '../components/NewEmployeeForm/NewEmployeeForm'
 
 // Action Creators
 export const getEmployees = () => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    try {
-        const { data } = await api.fetchEmployees()
+    try {        
+        const data = await api.getData()        
 
         dispatch({type: FETCH_ALL_EMPLOYEES, payload: data})
     } catch (error) {
@@ -12,13 +13,19 @@ export const getEmployees = () => async (dispatch: (arg0: { type: string; payloa
     }
 }
 
-export const createEmployee = (employee: any) => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
+// ACTIVATED
+export const createEmployee = (state: {employees: []}, newEmployee: Partial<EmployeeType>) => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
     try {
-        const { data } = await api.createEmployee(employee)
+        console.log([state]);
         
-        dispatch({type: CREATE_EMPLOYEE, payload: data.result})
+        const status = await api.setData({...state, employees: [...state.employees, newEmployee]})
+        
+        if(status === 200){
+            dispatch({type: CREATE_EMPLOYEE, payload: newEmployee})
+        }
+
     } catch (error) {
-        console.log(error)
+        console.log('error => ', error)
         return error
     }
 }

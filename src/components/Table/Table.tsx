@@ -1,26 +1,36 @@
 import * as React from "react";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { createEmployee } from "../../actions/employees";
+import NewEmployeeForm, {
+  EmployeeType,
+} from "../NewEmployeeForm/NewEmployeeForm";
+import EmployeeList from '../EmployeeList/EmployeeList'
+
 import "./Table.css";
 
-const Table = () => {
-  const [showForm, setShowForm] = useState(false);
+const Table: React.FC = () => {
+  const dispatch = useDispatch();
+  const state = useSelector((state: { employees: [] }) => state);
+  const [showForm, setShowForm] = React.useState(false);
+
+  const handleSubmit = (newEmployee: Partial<EmployeeType>) => {    
+    dispatch(createEmployee(state, newEmployee));
+    setShowForm(false);
+  };
+
+  // validation function will go here
 
   return (
     <div className="Table">
       <div className="table-wrapper">
         <h1 className="table-title">All Employees</h1>
-        <button className="add-employee-btn" onClick={() => setShowForm(true)}>Add Employee</button>
-      </div>
+        <button className="add-employee-btn" onClick={() => setShowForm(true)}>
+          Add Employee
+        </button>
 
-      <div className={`${showForm ? "display" : null} add-employee-wrapper`}>
-        <h1>Add Employee</h1>
-        <input type="text" placeholder="First Name" />
-        <input type="text" placeholder="Last Name" />
-        <input type="email" placeholder="email" />
-        <input type="text" placeholder="department" />
-        <input type="text" placeholder="role" />
-        <button className="add-employee-submit-btn" onClick={() => setShowForm(false)}>Save</button>
+        <EmployeeList />
       </div>
+      {showForm ? <NewEmployeeForm handleSubmit={handleSubmit} /> : null}
     </div>
   );
 };

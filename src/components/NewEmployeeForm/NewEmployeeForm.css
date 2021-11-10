@@ -1,0 +1,7 @@
+#department-field{
+    text-transform: uppercase;
+}
+
+#department-field::placeholder{
+    text-transform: capitalize;
+}
