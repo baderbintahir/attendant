@@ -8,56 +8,34 @@ import * as api from "../api";
 import { EmployeeType } from "../components/NewEmployeeForm/NewEmployeeForm";
 
 // Action Creators
-export const getEmployees =
-  () => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    try {
-      const data = await api.getData();
-
-      dispatch({ type: FETCH_ALL_EMPLOYEES, payload: data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const setEmployees = (employees: unknown) => {
+  
+  return { type: FETCH_ALL_EMPLOYEES, payload: employees }
+}
 
 // ACTIVATED
-export const createEmployee =
-  (state: { employees: [] }, newEmployee: Partial<EmployeeType>) =>
-  async (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    try {
-      const status = await api.setData({
-        ...state,
-        employees: [...state.employees, newEmployee],
-      });
+export const createEmployee = async (
+  newEmployee: Partial<EmployeeType>
+) => {
+  return { type: CREATE_EMPLOYEE, payload: newEmployee };
+};
 
-      if (status === 200) {
-        dispatch({ type: CREATE_EMPLOYEE, payload: newEmployee });
-      }
-    } catch (error) {
-      console.log("error => ", error);
-      return error;
-    }
-  };
+export const updateEmployee = async (id: any, employee: EmployeeType) => {
+  try {
+    const { data } = await api.updateEmployee(id, employee);
 
-export const updateEmployee =
-  (id: any, employee: any) =>
-  async (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    try {
-      const { data } = await api.updateEmployee(id, employee);
+    return { type: UPDATE_EMPLOYEE, payload: data };
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-      dispatch({ type: UPDATE_EMPLOYEE, payload: data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const deleteEmployee = async (id: any) => {
+  try {
+    await api.deleteEmployee(id);
 
-export const deleteEmployee =
-  (id: any) =>
-  async (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    try {
-      await api.deleteEmployee(id);
-
-      dispatch({ type: DELETE_EMPLOYEE, payload: id });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    return { type: DELETE_EMPLOYEE, payload: id };
+  } catch (error) {
+    console.log(error);
+  }
+};

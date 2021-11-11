@@ -1,14 +1,17 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import "./App.css";
-import { getEmployees } from "./actions/employees";
+import { setEmployees } from "./actions/employees";
 import EmployeeContainer from "./components/EmployeeContainer/EmployeeContainer";
+import { getData } from "./api";
+
+
 
 const App = () => {
   const dispatch = useDispatch()
-  
   React.useEffect(() => {
-    dispatch(getEmployees())
+    const employees = getData()
+    employees.then(res => dispatch(setEmployees(res)))
   }, []);
 
   return (

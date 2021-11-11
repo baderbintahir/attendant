@@ -2,7 +2,7 @@ import * as React from "react";
 import "./NewEmployeeForm.css";
 
 export type EmployeeType = {
-  id: string;
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;

@@ -1,4 +1,4 @@
-const TOKEN = "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";
+const TOKEN = "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";
 const GIST_ID = "43df1d70eab985ccd41cd877f2bc8081";
 const GIST_FILENAME = "db.json";
 

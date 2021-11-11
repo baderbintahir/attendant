@@ -1,5 +1,5 @@
 import * as React from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
 import { createEmployee } from "../../actions/employees";
 import NewEmployeeForm, {
@@ -8,34 +8,39 @@ import NewEmployeeForm, {
 import EmployeeList from "../EmployeeList/EmployeeList";
 
 import "./EmployeeContainer.css";
+import { setData } from "../../api";
 
 const EmployeeContainer: React.FC = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state: { employees: [] }) => state);
-  
-  const [showForm, setShowForm] = React.useState(false);
-  const [editEmployeeInfo, setEditEmployeeInfo] = React.useState({})
+  const state = useSelector((state: { employees: Array<EmployeeType> }) => state);
 
-  const handleSubmit = (newEmployee: Partial<EmployeeType>) => {
-    if(!newEmployee.id){
-      const _id: string = uuidv4()
-      dispatch(createEmployee(state, {...newEmployee, id: _id}));
-    } else{
-      const employees = [...state.employees].forEach((currentEmployee: EmployeeType, i: number) => {
-        if(currentEmployee.id === newEmployee.id){
-          return currentEmployee = newEmployee
-        }        
-      })
-      dispatch(createEmployee(state, newEmployee));
+  const [showForm, setShowForm] = React.useState(false);
+  const [editEmployeeInfo, setEditEmployeeInfo] = React.useState({});
+
+  const handleSubmit = (employee: Partial<EmployeeType>) => {
+    if (!employee._id) {
+      const id: string = uuidv4();
+      setData([...state.employees, { ...employee, _id: id }])
+      dispatch(createEmployee({...employee, _id: id}));
+    } else {
+      const updatedEmployees = [...state.employees];
+      // let employeeIndex = updatedEmployees.find(
+      //   (emp) => emp._id === employee._id
+      // );
+
+      console.log("29 => ", updatedEmployees, employee);
+
+      // dispatch(createEmployee(state, newEmployee));
     }
-    
+
     setShowForm(false);
   };
 
   const handleEdit = (employee: EmployeeType) => {
-    console.log(employee);
-    setEditEmployeeInfo(employee)
-  }
+    // console.log(employee);
+    setShowForm(true);
+    setEditEmployeeInfo(employee);
+  };
 
   // validation function will go here
 
@@ -47,7 +52,12 @@ const EmployeeContainer: React.FC = () => {
           Add Employee
         </button>
       </div>
-      {showForm ? <NewEmployeeForm handleSubmit={handleSubmit} editEmployeeInfo={editEmployeeInfo}/> : null}
+      {showForm ? (
+        <NewEmployeeForm
+          handleSubmit={handleSubmit}
+          editEmployeeInfo={editEmployeeInfo}
+        />
+      ) : null}
       <EmployeeList handleEdit={handleEdit} />
     </div>
   );
