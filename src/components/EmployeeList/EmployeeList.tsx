@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { EmployeeType } from "../NewEmployeeForm/NewEmployeeForm";
+import { EmployeeType } from "../EmployeeContainer/EmployeeContainer";
 import "./EmployeeList.css";
 
 type Prop = {
@@ -9,7 +9,7 @@ type Prop = {
 
 const Table = (props: Prop) => {
   const { employees } = useSelector((state: { employees: [] }) => state);
-  console.log(employees);
+  console.log("EmployeList:12", employees);
 
   return (
     <div className="EmployeeList">

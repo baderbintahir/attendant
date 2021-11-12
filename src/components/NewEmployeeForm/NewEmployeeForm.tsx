@@ -1,15 +1,8 @@
 import * as React from "react";
+import { EmployeeType } from "../EmployeeContainer/EmployeeContainer";
 import "./NewEmployeeForm.css";
 
-export type EmployeeType = {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  department: string;
-  role: string;
-  pin: string;
-}
+
 
 type Prop = {
   handleSubmit: (employee: Partial<EmployeeType>) => void;
@@ -17,7 +10,7 @@ type Prop = {
 };
 
 const NewEmployeeForm = (props: Prop) => {
-  const [newEmployee, setNewEmployee] = React.useState<Partial<EmployeeType>>(
+  const [employee, setEmployee] = React.useState<Partial<EmployeeType>>(
     props.editEmployeeInfo
   );
 
@@ -29,9 +22,9 @@ const NewEmployeeForm = (props: Prop) => {
         type="text"
         name="firstName"
         placeholder="First Name"
-        value={newEmployee.firstName || ""}
+        value={employee.firstName || ""}
         onChange={(e) =>
-          setNewEmployee({ ...newEmployee, firstName: e.target.value })
+          setEmployee({ ...employee, firstName: e.target.value })
         }
       />
       <input
@@ -39,9 +32,9 @@ const NewEmployeeForm = (props: Prop) => {
         type="text"
         name="lastName"
         placeholder="Last Name"
-        value={newEmployee.lastName || ""}
+        value={employee.lastName || ""}
         onChange={(e) =>
-          setNewEmployee({ ...newEmployee, lastName: e.target.value })
+          setEmployee({ ...employee, lastName: e.target.value })
         }
       />
       <input
@@ -49,9 +42,9 @@ const NewEmployeeForm = (props: Prop) => {
         type="email"
         name="email"
         placeholder="email"
-        value={newEmployee.email || ""}
+        value={employee.email || ""}
         onChange={(e) =>
-          setNewEmployee({ ...newEmployee, email: e.target.value })
+          setEmployee({ ...employee, email: e.target.value })
         }
       />
       <input
@@ -59,15 +52,15 @@ const NewEmployeeForm = (props: Prop) => {
         type="number"
         name="pin"
         placeholder="PIN"
-        value={newEmployee.pin || ""}
+        value={employee.pin || ""}
         onChange={(e) =>
-          setNewEmployee({ ...newEmployee, pin: e.target.value.slice(0, 4) })
+          setEmployee({ ...employee, pin: e.target.value.slice(0, 4) })
         }
       />
       <select
         className="dept-dropdown"
         onChange={(e) =>
-          setNewEmployee({ ...newEmployee, department: e.target.value })
+          setEmployee({ ...employee, department: e.target.value })
         }
       >
         <option value="">Departments</option>
@@ -82,15 +75,15 @@ const NewEmployeeForm = (props: Prop) => {
         type="text"
         name="role"
         placeholder="role"
-        value={newEmployee.role || ""}
+        value={employee.role || ""}
         onChange={(e) =>
-          setNewEmployee({ ...newEmployee, role: e.target.value })
+          setEmployee({ ...employee, role: e.target.value })
         }
       />
       <button
         className="add-employee-submit-btn"
         onClick={() => {
-          props.handleSubmit(newEmployee);
+          props.handleSubmit(employee);
         }}
       >
         Save

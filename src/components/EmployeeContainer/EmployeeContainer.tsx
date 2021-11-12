@@ -1,29 +1,47 @@
 import * as React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
-import { createEmployee } from "../../actions/employees";
-import NewEmployeeForm, {
-  EmployeeType,
-} from "../NewEmployeeForm/NewEmployeeForm";
+import { setEmployees } from "../../actions/employees";
+import NewEmployeeForm from "../NewEmployeeForm/NewEmployeeForm";
 import EmployeeList from "../EmployeeList/EmployeeList";
 
 import "./EmployeeContainer.css";
 import { setData } from "../../api";
 
+export type EmployeeType = {
+  _id?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  department?: string;
+  role?: string;
+  pin?: string;
+}
+
+export type EmployeesArrayType = Array<EmployeeType>
+
+
 const EmployeeContainer: React.FC = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state: { employees: Array<EmployeeType> }) => state);
+  const { employees } = useSelector((state: { employees: EmployeesArrayType }) => state);
 
   const [showForm, setShowForm] = React.useState(false);
   const [editEmployeeInfo, setEditEmployeeInfo] = React.useState({});
 
   const handleSubmit = (employee: Partial<EmployeeType>) => {
+
+
     if (!employee._id) {
-      const id: string = uuidv4();
-      setData([...state.employees, { ...employee, _id: id }])
-      dispatch(createEmployee({...employee, _id: id}));
+      const updatedEmployees: EmployeesArrayType = [...employees, { ...employee, _id: uuidv4() }]
+      // setData([...updatedEmployees]).then(res => console.log(res))      
+
+
+      dispatch(setEmployees(updatedEmployees));
+      console.log(updatedEmployees);
+
+
     } else {
-      const updatedEmployees = [...state.employees];
+      const updatedEmployees = [...employees];
       // let employeeIndex = updatedEmployees.find(
       //   (emp) => emp._id === employee._id
       // );
