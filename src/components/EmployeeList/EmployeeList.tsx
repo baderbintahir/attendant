@@ -5,11 +5,11 @@ import "./EmployeeList.css";
 
 type Prop = {
     handleEdit: (employee: Partial<EmployeeType>) => void;
+    handleDelete: (employeeIndex: number) => void;
 };
 
 const Table = (props: Prop) => {
   const { employees } = useSelector((state: { employees: [] }) => state);
-  console.log("EmployeList:12", employees);
 
   return (
     <div className="EmployeeList">
@@ -35,7 +35,7 @@ const Table = (props: Prop) => {
               <td>{employee.role}</td>
               <td>
                 <button onClick={() => props.handleEdit(employee)}>Edit</button>
-                <button>Delete</button>
+                <button onClick={() => props.handleDelete(index)}>Delete</button>
               </td>
             </tr>
           ))}

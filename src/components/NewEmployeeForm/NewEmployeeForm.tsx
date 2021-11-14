@@ -14,6 +14,11 @@ const NewEmployeeForm = (props: Prop) => {
     props.editEmployeeInfo
   );
 
+  React.useEffect(() => {
+    setEmployee(props.editEmployeeInfo)
+  }, [props.editEmployeeInfo])
+  
+
   return (
     <div className="NewEmployeeForm add-employee-wrapper">
       <h1>Add Employee</h1>
@@ -59,6 +64,7 @@ const NewEmployeeForm = (props: Prop) => {
       />
       <select
         className="dept-dropdown"
+        value={employee.department || ""}
         onChange={(e) =>
           setEmployee({ ...employee, department: e.target.value })
         }

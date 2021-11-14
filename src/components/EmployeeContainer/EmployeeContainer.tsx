@@ -29,36 +29,34 @@ const EmployeeContainer: React.FC = () => {
   const [editEmployeeInfo, setEditEmployeeInfo] = React.useState({});
 
   const handleSubmit = (employee: Partial<EmployeeType>) => {
-
-
     if (!employee._id) {
       const updatedEmployees: EmployeesArrayType = [...employees, { ...employee, _id: uuidv4() }]
-      // setData([...updatedEmployees]).then(res => console.log(res))      
-
-
+      setData(updatedEmployees)
       dispatch(setEmployees(updatedEmployees));
-      console.log(updatedEmployees);
-
-
     } else {
       const updatedEmployees = [...employees];
-      // let employeeIndex = updatedEmployees.find(
-      //   (emp) => emp._id === employee._id
-      // );
-
-      console.log("29 => ", updatedEmployees, employee);
-
-      // dispatch(createEmployee(state, newEmployee));
+      let employeeIndex = updatedEmployees.findIndex(
+        (emp) => emp._id === employee._id
+      );
+      updatedEmployees[employeeIndex] = employee
+      setData(updatedEmployees)
+      dispatch(setEmployees(updatedEmployees))
     }
 
     setShowForm(false);
   };
 
   const handleEdit = (employee: EmployeeType) => {
-    // console.log(employee);
     setShowForm(true);
     setEditEmployeeInfo(employee);
   };
+
+  const handleDelete = (employeeIndex: number) => {
+    const updatedEmployees = [...employees];
+    updatedEmployees.splice(employeeIndex, 1)
+    setData(updatedEmployees)
+    dispatch(setEmployees(updatedEmployees))
+  }
 
   // validation function will go here
 
@@ -76,7 +74,7 @@ const EmployeeContainer: React.FC = () => {
           editEmployeeInfo={editEmployeeInfo}
         />
       ) : null}
-      <EmployeeList handleEdit={handleEdit} />
+      <EmployeeList handleEdit={handleEdit} handleDelete={handleDelete} />
     </div>
   );
 };

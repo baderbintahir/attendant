@@ -13,7 +13,6 @@ const initialState: EmployeeReducer = {
 }
 
 const employeesReducer = (state = initialState, action: Action): EmployeesArrayType => {
-    console.log("reducer:20 => ", action);
     switch (action.type) {
         case GET_EMPLOYEES:
             return action.payload;
