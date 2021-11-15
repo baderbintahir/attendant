@@ -1,4 +1,4 @@
-import { EmployeesArrayType } from "../components/EmployeeContainer/EmployeeContainer";
+import { EmployeesArrayType } from "../components/CRUDEmployeeList/CRUDEmployeeList";
 import { GET_EMPLOYEES, SET_EMPLOYEE } from "../constants/actionTypes";
 
 // Action Creators

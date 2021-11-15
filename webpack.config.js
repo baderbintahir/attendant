@@ -29,5 +29,8 @@ module.exports = {
   resolve: {
     extensions: [ '.tsx', '.ts', '.js', '.css' ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'index.html') })]
+  plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'index.html') })],
+  devServer: {
+    historyApiFallback: true,
+  },
 };

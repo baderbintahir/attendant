@@ -1,6 +1,6 @@
-import { EmployeesArrayType } from "../components/EmployeeContainer/EmployeeContainer";
+import { EmployeesArrayType } from "../components/CRUDEmployeeList/CRUDEmployeeList";
 
-const TOKEN = "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";
+const TOKEN = "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";
 const GIST_ID = "43df1d70eab985ccd41cd877f2bc8081";
 const GIST_FILENAME = "db.json";
 

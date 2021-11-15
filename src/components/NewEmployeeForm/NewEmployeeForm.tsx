@@ -1,12 +1,10 @@
 import * as React from "react";
-import { EmployeeType } from "../EmployeeContainer/EmployeeContainer";
+import { EmployeeType } from "../CRUDEmployeeList/CRUDEmployeeList";
 import "./NewEmployeeForm.css";
-
-
 
 type Prop = {
   handleSubmit: (employee: Partial<EmployeeType>) => void;
-  editEmployeeInfo: {}
+  editEmployeeInfo: {};
 };
 
 const NewEmployeeForm = (props: Prop) => {
@@ -15,9 +13,8 @@ const NewEmployeeForm = (props: Prop) => {
   );
 
   React.useEffect(() => {
-    setEmployee(props.editEmployeeInfo)
-  }, [props.editEmployeeInfo])
-  
+    setEmployee(props.editEmployeeInfo);
+  }, [props.editEmployeeInfo]);
 
   return (
     <div className="NewEmployeeForm add-employee-wrapper">
@@ -38,9 +35,7 @@ const NewEmployeeForm = (props: Prop) => {
         name="lastName"
         placeholder="Last Name"
         value={employee.lastName || ""}
-        onChange={(e) =>
-          setEmployee({ ...employee, lastName: e.target.value })
-        }
+        onChange={(e) => setEmployee({ ...employee, lastName: e.target.value })}
       />
       <input
         id="email-field"
@@ -48,9 +43,7 @@ const NewEmployeeForm = (props: Prop) => {
         name="email"
         placeholder="email"
         value={employee.email || ""}
-        onChange={(e) =>
-          setEmployee({ ...employee, email: e.target.value })
-        }
+        onChange={(e) => setEmployee({ ...employee, email: e.target.value })}
       />
       <input
         id="pin-field"
@@ -82,9 +75,7 @@ const NewEmployeeForm = (props: Prop) => {
         name="role"
         placeholder="role"
         value={employee.role || ""}
-        onChange={(e) =>
-          setEmployee({ ...employee, role: e.target.value })
-        }
+        onChange={(e) => setEmployee({ ...employee, role: e.target.value })}
       />
       <button
         className="add-employee-submit-btn"
