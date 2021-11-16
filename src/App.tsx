@@ -5,8 +5,12 @@ import "./App.css";
 import { getEmployees } from "./actions/employees";
 import CRUDEmployeeList from "./components/CRUDEmployeeList/CRUDEmployeeList";
 import { getData } from "./api";
-import Employees from "./components/Employees/Employees";
 import Login from "./components/Login/Login";
+import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
+import PunchCard from "./components/PunchCard/PunchCard";
+
+const isAuthenticated = JSON.parse(localStorage.getItem("profile"));
+const isAdmin = isAuthenticated.role === "admin"
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,12 +23,10 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<CRUDEmployeeList />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/all_employees' element={<Employees type="all" />} />
-          <Route path='/available_employees' element={<Employees type="available" />} />
-          <Route path='/unavailable_employees' element={<Employees type="unavailable" />} />
-          <Route path='/on_leave_employees' element={<Employees type="on_leave" />} />
+          <Route path='/crud_employees' element={isAuthenticated && isAdmin ? <CRUDEmployeeList /> : <Login />} />
+          <Route path='/admin_dashboard' element={isAuthenticated && isAdmin ? <AdminDashboard /> : <Login />} />    
+          <Route path='/punch_card' element={isAuthenticated ? <PunchCard /> : <Login />} />    
           <Route path="*" element={<h1>404 PAGE NOT FOUND!!!</h1>} />
         </Routes>
       </BrowserRouter>

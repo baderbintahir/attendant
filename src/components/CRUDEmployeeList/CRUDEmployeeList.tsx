@@ -15,11 +15,21 @@ export type EmployeeType = {
   department?: string;
   role?: string;
   pin?: string;
-  availale?: boolean;
+  available?: boolean;
   leave?: boolean
 };
 
 export type EmployeesArrayType = Array<EmployeeType>;
+
+export const updateEmployees = (employees: EmployeesArrayType, updatedEmployee:EmployeeType, dispatch:any) => {
+  const updatedEmployees = [...employees];
+    const employeeIndex = updatedEmployees.findIndex(
+      (emp) => emp._id === updatedEmployee._id
+    );
+    updatedEmployees[employeeIndex] = updatedEmployee;
+    setData(updatedEmployees);
+    dispatch(setEmployees(updatedEmployees));
+}
 
 const CRUDEmployeeList: React.FC = () => {  
   const dispatch = useDispatch();
@@ -36,13 +46,7 @@ const CRUDEmployeeList: React.FC = () => {
       setData(updatedEmployees);
       dispatch(setEmployees(updatedEmployees));
     } else {
-      const updatedEmployees = [...employees];
-      let employeeIndex = updatedEmployees.findIndex(
-        (emp) => emp._id === employee._id
-      );
-      updatedEmployees[employeeIndex] = employee;
-      setData(updatedEmployees);
-      dispatch(setEmployees(updatedEmployees));
+      updateEmployees(employees, employee, dispatch)
     }
   };
 

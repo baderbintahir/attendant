@@ -16,27 +16,28 @@ const Employees: React.FC<Prop> = (props) => {
 
   let data: EmployeesArrayType = [];
   let heading: string = "";
-
   switch (props.type) {
     case "all":
       data = employees;
-      heading = "All Employees"
+      heading = "All Employees";
       break;
     case "available":
-      data = employees.filter((employee) => employee.availale);
-      heading = "Available Employees"
+      data = employees.filter((employee) => employee.available);
+      heading = "Available Employees";
       break;
     case "unavailable":
-      data = employees.filter((employee) => !employee.availale);
-      heading = "Unavailable Employees"
+      data = employees.filter((employee) => !employee.available);
+      heading = "Unavailable Employees";
       break;
-    case "on_leave":
-        data = employees.filter((employee) => employee.leave);
-        heading = "Employees On Leave"
-        break;
+    case "on leave":
+      data = employees.filter((employee) => employee.leave);
+      heading = "Employees On Leave";
+      break;
     default:
       break;
   }
+
+  console.log(data);
 
   return (
     <div className="Employees">

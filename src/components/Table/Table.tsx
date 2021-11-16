@@ -47,6 +47,7 @@ const Table = (props: Prop) => {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
+            <th>PIN</th>
             <th>Department</th>
             <th>Role</th>
             {props.handles ? <th>Actions</th> : null}
@@ -59,12 +60,14 @@ const Table = (props: Prop) => {
               <td>{employee.firstName}</td>
               <td>{employee.lastName}</td>
               <td>{employee.email}</td>
+              <td>{employee.pin}</td>
               <td>{employee.department}</td>
               <td>{employee.role}</td>
               {props.handles ? (
                 <td>
                   <button
                     onClick={() => {
+                      setShowForm(true)
                       setEditEmployeeInfo(employee);
                     }}
                   >
