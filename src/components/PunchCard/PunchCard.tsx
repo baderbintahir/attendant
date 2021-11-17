@@ -1,10 +1,9 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  EmployeesArrayType,
+  EmployeeType,
   updateEmployees,
 } from "../CRUDEmployeeList/CRUDEmployeeList";
-
 import "./PunchCard.css";
 
 const PunchCard: React.FC = () => {
@@ -13,11 +12,8 @@ const PunchCard: React.FC = () => {
   const [punchIn, setPunchIn] = React.useState(false);
   const [appliedLeave, setAppliedLeave] = React.useState(loggedUser.leave);
   const { employees } = useSelector(
-    (state: { employees: EmployeesArrayType }) => state
+    (state: { employees: Array<EmployeeType> }) => state
   );
-
-  console.log(appliedLeave, loggedUser);
-  
 
   const handlePunch = () => {
     setPunchIn(!punchIn);

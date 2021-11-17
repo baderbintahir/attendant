@@ -1,5 +1,5 @@
 import * as React from "react";
-import { EmployeesArrayType, EmployeeType } from "../CRUDEmployeeList/CRUDEmployeeList";
+import { EmployeeType } from "../CRUDEmployeeList/CRUDEmployeeList";
 import NewEmployeeForm from "../NewEmployeeForm/NewEmployeeForm";
 import "./Table.css";
 
@@ -9,7 +9,7 @@ type Prop = {
     handleSubmit?: (employee: EmployeeType) => void;
     handleDelete?: (employeeIndex: number) => void;
   };
-  employees: EmployeesArrayType;
+  employees: Array<EmployeeType>;
 };
 
 const Table = (props: Prop) => {
@@ -67,7 +67,7 @@ const Table = (props: Prop) => {
                 <td className="action-btns">
                   <button
                     onClick={() => {
-                      setShowForm(true)
+                      setShowForm(true);
                       setEditEmployeeInfo(employee);
                     }}
                   >

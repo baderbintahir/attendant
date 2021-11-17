@@ -1,8 +1,7 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { EmployeesArrayType } from "../CRUDEmployeeList/CRUDEmployeeList";
+import { EmployeeType } from "../CRUDEmployeeList/CRUDEmployeeList";
 import Table from "../Table/Table";
-
 import "./Employees.css";
 
 type Prop = {
@@ -11,11 +10,11 @@ type Prop = {
 
 const Employees: React.FC<Prop> = (props) => {
   const { employees } = useSelector(
-    (state: { employees: EmployeesArrayType }) => state
+    (state: { employees: Array<EmployeeType> }) => state
   );
-
-  let data: EmployeesArrayType = [];
+  let data: Array<EmployeeType> = [];
   let heading: string = "";
+  
   switch (props.type) {
     case "all":
       data = employees;
