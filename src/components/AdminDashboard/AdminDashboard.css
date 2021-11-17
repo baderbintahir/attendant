@@ -1,0 +1,23 @@
+.tab-btns {
+  border-bottom: 1px solid #b3b3b3;
+}
+
+.tab-btns button {
+  background: inherit;
+  color: #efefef;
+  border: none;
+  font-size: 0.9rem;
+  padding: 1rem 2rem;
+  text-transform: capitalize;
+}
+
+.tab-btns button:hover {
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.active {
+  font-weight: 600;
+  border-bottom: 2px solid !important;
+}

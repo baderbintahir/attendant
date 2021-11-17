@@ -37,8 +37,6 @@ const Employees: React.FC<Prop> = (props) => {
       break;
   }
 
-  console.log(data);
-
   return (
     <div className="Employees">
       <Table heading={heading} handles={null} employees={data} />

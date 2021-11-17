@@ -50,7 +50,7 @@ const Table = (props: Prop) => {
             <th>PIN</th>
             <th>Department</th>
             <th>Role</th>
-            {props.handles ? <th>Actions</th> : null}
+            {props.handles ? <th className="actions-title">Actions</th> : null}
           </tr>
         </thead>
 
@@ -64,7 +64,7 @@ const Table = (props: Prop) => {
               <td>{employee.department}</td>
               <td>{employee.role}</td>
               {props.handles ? (
-                <td>
+                <td className="action-btns">
                   <button
                     onClick={() => {
                       setShowForm(true)
