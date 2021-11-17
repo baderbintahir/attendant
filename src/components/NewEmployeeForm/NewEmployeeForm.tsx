@@ -5,6 +5,7 @@ import "./NewEmployeeForm.css";
 type Prop = {
   handleSubmit: (employee: Partial<EmployeeType>) => void;
   editEmployeeInfo: {};
+  setShowForm: any;
 };
 
 const NewEmployeeForm = (props: Prop) => {
@@ -17,8 +18,13 @@ const NewEmployeeForm = (props: Prop) => {
   }, [props.editEmployeeInfo]);
 
   return (
-    <div className="NewEmployeeForm add-employee-wrapper">
-      <div className="form">
+    <div
+      className="NewEmployeeForm add-employee-wrapper"
+      onClick={() => {
+        props.setShowForm(false);
+      }}
+    >
+      <div className="form" onClick={(e) => e.stopPropagation()}>
         <h1>Add Employee</h1>
         <input
           id="firstName-field"

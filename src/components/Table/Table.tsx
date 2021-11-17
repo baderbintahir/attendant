@@ -38,6 +38,7 @@ const Table = (props: Prop) => {
             props.handles.handleSubmit(employee);
           }}
           editEmployeeInfo={editEmployeeInfo}
+          setShowForm={setShowForm}
         />
       ) : null}
 

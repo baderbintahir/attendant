@@ -1,5 +1,8 @@
-.tab-btns {
+.tabs-header {
   border-bottom: 1px solid #b3b3b3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .tab-btns button {
@@ -20,4 +23,25 @@
 .active {
   font-weight: 600;
   border-bottom: 2px solid !important;
+}
+
+input#search-field, button.search-btn {
+  font-size: 1rem;
+  padding: 0.4rem;
+  background: inherit;
+  border: none;
+  color: white;
+}
+
+button.search-btn{
+  cursor: pointer;
+}
+
+input#search-field:focus {
+  outline: none;
+}
+
+.search-wrapper {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid white;
 }

@@ -21,6 +21,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <div className="dim-bg"></div>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />

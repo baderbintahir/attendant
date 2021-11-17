@@ -34,10 +34,9 @@ const Login = () => {
   return (
     <div className="login-form">
       <div className="login-box">
-        <div className="dim-bg"></div>
-        <h2>Attendant</h2>
+        <h1>Log In</h1>
         <input
-          className="input-field"
+          className="login-email-field"
           type="text"
           name="email"
           id="email"
@@ -45,7 +44,7 @@ const Login = () => {
           onChange={handleChange}
         />
         <input
-          className="input-field"
+          className="login-pw-field"
           type="password"
           name="pin"
           id="pin"

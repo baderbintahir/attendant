@@ -10,16 +10,28 @@ const AdminDashboard: React.FC = () => {
   return (
     <div className="AdminDashboard">
       <NavBar />
-      <div className="tab-btns">
-        {employeeTypes.map((type, index) => (
-          <button
-            key={index}
-            onClick={() => setActiveTab(type)}
-            className={type === activeTab ? "active" : null}
-          >
-            {type} Employees
-          </button>
-        ))}
+      <div className="tabs-header">
+        <div className="tab-btns">
+          {employeeTypes.map((type, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(type)}
+              className={type === activeTab ? "active" : null}
+            >
+              {type} Employees
+            </button>
+          ))}
+        </div>
+
+        <div className="search-wrapper">
+          <input
+            type="text"
+            name="search-field"
+            id="search-field"
+            placeholder="Search"
+          />
+          <button className="search-btn"><i className="fa fa-search"></i></button>
+        </div>
       </div>
       <div className="tabs">
         <Employees type={activeTab} />
