@@ -1,10 +1,11 @@
 import * as React from "react";
-import Employees from "../Employees/Employees";
+import EmployeeList from "../EmployeeList/EmployeeList";
 import NavBar from "../NavBar/NavBar";
 import "./AdminDashboard.css";
 
 const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = React.useState("all");
+  const [search, setSearch] = React.useState("");
   const employeeTypes = ["all", "available", "unavailable", "on leave"];
 
   return (
@@ -29,12 +30,13 @@ const AdminDashboard: React.FC = () => {
             name="search-field"
             id="search-field"
             placeholder="Search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
-          <button className="search-btn"><i className="fa fa-search"></i></button>
         </div>
       </div>
       <div className="tabs">
-        <Employees type={activeTab} />
+        <EmployeeList type={activeTab} search={search} />
       </div>
     </div>
   );

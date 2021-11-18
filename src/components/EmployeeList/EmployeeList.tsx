@@ -2,10 +2,11 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { EmployeeType } from "../CRUDEmployeeList/CRUDEmployeeList";
 import Table from "../Table/Table";
-import "./Employees.css";
+import "./EmployeeList.css";
 
 type Prop = {
   type: string;
+  search: string;
 };
 
 const Employees: React.FC<Prop> = (props) => {
@@ -14,7 +15,7 @@ const Employees: React.FC<Prop> = (props) => {
   );
   let data: Array<EmployeeType> = [];
   let heading: string = "";
-  
+
   switch (props.type) {
     case "all":
       data = employees;
@@ -34,6 +35,17 @@ const Employees: React.FC<Prop> = (props) => {
       break;
     default:
       break;
+  }
+
+  if (props.search) {
+    data = data.filter(
+      (employee) =>
+        employee.email.toLowerCase().includes(props.search) ||
+        employee.firstName.toLowerCase().includes(props.search) ||
+        employee.lastName.toLowerCase().includes(props.search) ||
+        employee.department.toLowerCase().includes(props.search) ||
+        employee.role.toLowerCase().includes(props.search)
+    );
   }
 
   return (

@@ -27,13 +27,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route
             path="/"
-            element={isAuthenticated ? <PunchCard /> : <Login />}
-          />
-          <Route
-            path="/admin_dashboard"
-            element={
-              isAuthenticated && isAdmin ? <AdminDashboard /> : <Login />
-            }
+            element={isAuthenticated && !isAdmin ? <PunchCard /> : <AdminDashboard />}
           />
           <Route
             path="/crud_employees"
