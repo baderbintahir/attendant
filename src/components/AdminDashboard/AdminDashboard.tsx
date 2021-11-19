@@ -1,5 +1,5 @@
 import * as React from "react";
-import EmployeeList from "../EmployeeList/EmployeeList";
+import EmployeeContainer from "../../containers/EmployeeContainer/EmployeeContainer";
 import NavBar from "../NavBar/NavBar";
 import "./AdminDashboard.css";
 
@@ -36,7 +36,7 @@ const AdminDashboard: React.FC = () => {
         </div>
       </div>
       <div className="tabs">
-        <EmployeeList type={activeTab} search={search} />
+        <EmployeeContainer type={activeTab} search={search} />
       </div>
     </div>
   );

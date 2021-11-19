@@ -1,46 +1,49 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  EmployeeType,
-  updateEmployees,
-} from "../CRUDEmployeeList/CRUDEmployeeList";
-import "./PunchCard.css";
+import { login } from "../../actions/employees";
+import { updateEmployees } from "../../shared/utils";
+import { EmployeeType } from "../../types/employees";
+import NavBar from "../NavBar/NavBar";
+import "./PunchCard.css"
 
 const PunchCard: React.FC = () => {
   const dispatch = useDispatch();
-  const loggedUser = JSON.parse(localStorage.getItem("profile"));
-  const [punchIn, setPunchIn] = React.useState(false);
-  const [appliedLeave, setAppliedLeave] = React.useState(loggedUser.leave);
-  const { employees } = useSelector(
-    (state: { employees: Array<EmployeeType> }) => state
+  const { employees, user } = useSelector(
+    (state: { employees: Array<EmployeeType>, user: EmployeeType }) => state
   );
+  const [punchIn, setPunchIn] = React.useState(user?.available);
+  const [appliedLeave, setAppliedLeave] = React.useState(user?.leave);
+  console.log(user);
+  
 
   const handlePunch = () => {
+    user.available = !punchIn;
     setPunchIn(!punchIn);
-    loggedUser.available = punchIn;
-    updateEmployees(employees, loggedUser, dispatch);
+    dispatch(login(user))
+    updateEmployees(employees, user, dispatch);
   };
 
   const handleLeave = () => {
+    user.available = appliedLeave;
+    user.leave = !appliedLeave;
     setAppliedLeave(true);
-    loggedUser.available = appliedLeave;
-    loggedUser.leave = !appliedLeave;
-    updateEmployees(employees, loggedUser, dispatch);
+    updateEmployees(employees, user, dispatch);
   };
 
   return (
     <div className="PunchCard-wrapper">
+      <NavBar />
       <div className="punch-card">
         <h1>Punch Card</h1>
         <button
-          className="in-out-btn"
+          className="in-out-btn button"
           onClick={handlePunch}
           disabled={appliedLeave}
         >
           Punch {!punchIn ? "In" : "Out"}
         </button>
         <button
-          className="leave-btn"
+          className="leave-btn button"
           onClick={handleLeave}
           disabled={appliedLeave}
         >

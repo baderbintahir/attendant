@@ -3,37 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { setData } from "../../api";
 import { setEmployees } from "../../actions/employees";
-import Table from "../Table/Table";
-import "./CRUDEmployeeList.css";
-
-export type EmployeeType = {
-  _id?: string;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  department?: string;
-  role?: string;
-  pin?: string;
-  available?: boolean;
-  leave?: boolean;
-};
-
-export const updateEmployees = (
-  employees: Array<EmployeeType>,
-  updatedEmployee: EmployeeType,
-  dispatch: any
-) => {
-  const updatedEmployees = [...employees];
-  const employeeIndex = updatedEmployees.findIndex(
-    (emp) => emp._id === updatedEmployee._id
-  );
-  updatedEmployees[employeeIndex] = updatedEmployee;
-  setData(updatedEmployees);
-  dispatch(setEmployees(updatedEmployees));
-};
+import EmployeeList from "../EmployeeList/EmployeeList";
+import { EmployeeType } from "../../types/employees";
+import { updateEmployees } from "../../shared/utils";
+import Notification from "../Notification/Notification";
 
 const CRUDEmployeeList: React.FC = () => {
   const dispatch = useDispatch();
+  const [notification, setNotification] = React.useState({
+    show: false,
+    text: "",
+  });
   const { employees } = useSelector(
     (state: { employees: Array<EmployeeType> }) => state
   );
@@ -44,27 +24,41 @@ const CRUDEmployeeList: React.FC = () => {
         ...employees,
         { ...employee, _id: uuidv4() },
       ];
-      setData(updatedEmployees);
-      dispatch(setEmployees(updatedEmployees));
+      setData(updatedEmployees).then((status) => {
+        if (status === 200) {
+          setNotification({show: true, text: "Employee added successfully!!!"});
+
+          dispatch(setEmployees(updatedEmployees));
+        }
+      });
     } else {
       updateEmployees(employees, employee, dispatch);
+      setNotification({show: true, text: "Employee updated successfully!!!"});
     }
   };
 
-  const handleDelete = (employeeIndex: number) => {
-    const updatedEmployees = [...employees];
-    updatedEmployees.splice(employeeIndex, 1);
-    setData(updatedEmployees);
-    dispatch(setEmployees(updatedEmployees));
+  const handleDelete = (employee: EmployeeType) => {
+    const updatedEmployees = employees.filter(
+      (emp) => emp._id !== employee._id
+    );
+    setData(updatedEmployees).then((status) => {
+      if (status === 200) {
+        setNotification({show: true, text: "Employee deleted successfully!!!"});
+
+        dispatch(setEmployees(updatedEmployees));
+      }
+    });
   };
 
   return (
     <div className="CRUDEmployeeList">
-      <Table
+      <EmployeeList
         heading="All Employees"
-        handles={{ handleSubmit, handleDelete }}
+        handleDelete={handleDelete}
+        handleSubmit={handleSubmit}
         employees={employees}
       />
+      <Notification notification={notification} setNotification={setNotification} />
     </div>
   );
 };

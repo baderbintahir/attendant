@@ -1,16 +1,16 @@
-import { EmployeeType } from "../components/CRUDEmployeeList/CRUDEmployeeList";
-import { GET_EMPLOYEES, SET_EMPLOYEE, LOGIN } from "../constants/actionTypes";
+import { EmployeeType } from "../types/employees";
+import { GET_EMPLOYEES, SET_EMPLOYEE, LOGIN, LOGOUT } from "../constants/actionTypes";
 
 type Action = { type: string; payload: Array<EmployeeType> };
 
 type EmployeeReducer = {
   employees: Array<EmployeeType>;
-  auth: {};
+  user: {};
   isLoading: boolean;
 };
 const initialState: EmployeeReducer = {
   employees: [],
-  auth: {},
+  user: {},
   isLoading: false,
 };
 
@@ -22,7 +22,10 @@ const reducer = (state = initialState, action: Action): EmployeeReducer => {
       return { ...state, employees: action.payload };
     case LOGIN:
       localStorage.setItem("profile", JSON.stringify(action.payload));
-      return { ...state, auth: action.payload };
+      return { ...state, user: action.payload };
+    case LOGOUT:
+      localStorage.clear();
+      return { ...state, user: null };
     default:
       return state;
   }

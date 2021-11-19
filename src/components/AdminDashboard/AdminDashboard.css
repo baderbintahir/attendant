@@ -1,22 +1,22 @@
 .tabs-header {
-  border-bottom: 1px solid #b3b3b3;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  border-bottom: 1px solid #b3b3b3;
 }
 
 .tab-btns button {
   background: inherit;
-  color: #efefef;
-  border: none;
+  color: #fdfdfd;
   font-size: 0.9rem;
+  border: none;
   padding: 1rem 2rem;
   text-transform: capitalize;
 }
 
 .tab-btns button:hover {
-  text-decoration: none;
   background-color: rgba(255, 255, 255, 0.08);
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -25,15 +25,16 @@
   border-bottom: 2px solid !important;
 }
 
-input#search-field, button.search-btn {
+input#search-field,
+button.search-btn {
+  color: white;
+  background: inherit;
   font-size: 1rem;
   padding: 0.4rem;
-  background: inherit;
   border: none;
-  color: white;
 }
 
-button.search-btn{
+button.search-btn {
   cursor: pointer;
 }
 
@@ -43,5 +44,9 @@ input#search-field:focus {
 
 .search-wrapper {
   margin-bottom: 1rem;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #b3b3b3;
+}
+
+.search-wrapper:focus-within {
+  border-bottom: 1px solid #fdfdfd;
 }
