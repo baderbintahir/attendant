@@ -26,12 +26,6 @@ const NavBar = () => {
       </span>
 
       <div className="nav-btns">
-        <button
-          className="crud-btn"
-          onClick={() => navigate("/crud_employees")}
-        >
-          Update Employees
-        </button>
         <button className="logout-btn" onClick={handleLogout}>
           Log Out
         </button>

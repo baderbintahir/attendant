@@ -1,3 +1,8 @@
+.AdminDashboard {
+  width: 90%;
+  margin: auto;
+}
+
 .tabs-header {
   display: flex;
   justify-content: space-between;

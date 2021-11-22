@@ -1,7 +1,9 @@
 import * as React from "react";
 import { EmployeeType } from "../../types/employees";
 import NewEmployeeForm from "../NewEmployeeForm/NewEmployeeForm";
+import { Pagination } from "antd";
 import "./EmployeeList.css";
+import { useNavigate } from "react-router";
 
 type Prop = {
   heading: string;
@@ -11,14 +13,26 @@ type Prop = {
 };
 
 const EmployeeList = (props: Prop) => {
+  const navigate = useNavigate()
   const [showForm, setShowForm] = React.useState(false);
   const [employee, setEmployee] = React.useState({});
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [currentList, setCurrentList] = React.useState(
+    props.employees.slice(0, 10)
+  );
+
+  React.useEffect(() => {
+    setCurrentList(
+      props.employees.slice((currentPage - 1) * 10, currentPage * 10)
+    );
+  }, [currentPage, props.employees]);
+  
 
   return (
     <div className="Table">
       <div className="wrapper-header">
         <h1 className="table-title">{props.heading}</h1>
-        {props.handleSubmit && (
+        {props.handleSubmit ? (
           <button
             className="add-employee-btn"
             onClick={() => {
@@ -26,6 +40,15 @@ const EmployeeList = (props: Prop) => {
             }}
           >
             Add Employee
+          </button>
+        ) : (
+          <button
+            className="add-employee-btn"
+            onClick={() => {
+              navigate("/crud_employees");
+            }}
+          >
+            Update Employees
           </button>
         )}
       </div>
@@ -54,7 +77,7 @@ const EmployeeList = (props: Prop) => {
         </thead>
 
         <tbody>
-          {props.employees.map((employee: EmployeeType, index: number) => (
+          {currentList.map((employee: EmployeeType, index: number) => (
             <tr key={index}>
               <td>{employee.firstName}</td>
               <td>{employee.lastName}</td>
@@ -81,6 +104,15 @@ const EmployeeList = (props: Prop) => {
           ))}
         </tbody>
       </table>
+      <Pagination
+        defaultCurrent={1}
+        total={props.employees.length}
+        onChange={(page) => setCurrentPage(page)}
+        hideOnSinglePage
+        responsive
+        showLessItems
+        showSizeChanger={false}
+      />
     </div>
   );
 };
