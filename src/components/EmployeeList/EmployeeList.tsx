@@ -13,7 +13,7 @@ type Prop = {
 };
 
 const EmployeeList = (props: Prop) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [showForm, setShowForm] = React.useState(false);
   const [employee, setEmployee] = React.useState({});
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -26,7 +26,6 @@ const EmployeeList = (props: Prop) => {
       props.employees.slice((currentPage - 1) * 10, currentPage * 10)
     );
   }, [currentPage, props.employees]);
-  
 
   return (
     <div className="Table">

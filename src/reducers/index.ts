@@ -1,5 +1,10 @@
 import { EmployeeType } from "../types/employees";
-import { GET_EMPLOYEES, SET_EMPLOYEE, LOGIN, LOGOUT } from "../constants/actionTypes";
+import {
+  GET_EMPLOYEES,
+  SET_EMPLOYEE,
+  LOGIN,
+  LOGOUT,
+} from "../constants/actionTypes";
 
 type Action = { type: string; payload: Array<EmployeeType> };
 

@@ -70,9 +70,7 @@ const Login = () => {
           onChange={handleChange}
           required
         />
-        {error.pinError && (
-          <span className={"user-error"}>Invalid pin!</span>
-        )}
+        {error.pinError && <span className={"user-error"}>Invalid pin!</span>}
 
         <button className="submit-btn" type="submit">
           Log In

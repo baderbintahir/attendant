@@ -4,36 +4,36 @@ import { login } from "../../actions/employees";
 import { updateEmployees } from "../../shared/utils";
 import { EmployeeType } from "../../types/employees";
 import NavBar from "../NavBar/NavBar";
-import "./PunchCard.css"
+import "./PunchCard.css";
 
 const PunchCard: React.FC = () => {
   const dispatch = useDispatch();
   const { employees, user } = useSelector(
-    (state: { employees: Array<EmployeeType>, user: EmployeeType }) => state
+    (state: { employees: Array<EmployeeType>; user: EmployeeType }) => state
   );
   const [punchIn, setPunchIn] = React.useState(false);
   const [appliedLeave, setAppliedLeave] = React.useState(false);
 
   React.useEffect(() => {
-    setPunchIn(user.available)
-    setAppliedLeave(user.leave)
-  }, [user])  
+    setPunchIn(user.available);
+    setAppliedLeave(user.leave);
+  }, [user]);
 
   const handlePunch = () => {
     user.available = !punchIn;
     setPunchIn(!punchIn);
-    dispatch(login(user))
+    dispatch(login(user));
     updateEmployees(employees, user, dispatch);
   };
 
   const handleLeave = () => {
     user.available = false;
     user.leave = true;
-    setPunchIn(false)
+    setPunchIn(false);
     setAppliedLeave(true);
-    dispatch(login(user))
+    dispatch(login(user));
     updateEmployees(employees, user, dispatch);
-  };  
+  };
 
   return (
     <div className="PunchCard-wrapper">
