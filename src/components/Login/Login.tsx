@@ -19,7 +19,6 @@ const Login = () => {
     (state: { employees: Array<EmployeeType> }) => state
   );
 
-  console.log(error);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const oldUser = employees.find(

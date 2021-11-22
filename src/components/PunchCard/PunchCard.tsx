@@ -11,10 +11,13 @@ const PunchCard: React.FC = () => {
   const { employees, user } = useSelector(
     (state: { employees: Array<EmployeeType>, user: EmployeeType }) => state
   );
-  const [punchIn, setPunchIn] = React.useState(user?.available);
-  const [appliedLeave, setAppliedLeave] = React.useState(user?.leave);
-  console.log(user);
-  
+  const [punchIn, setPunchIn] = React.useState(false);
+  const [appliedLeave, setAppliedLeave] = React.useState(false);
+
+  React.useEffect(() => {
+    setPunchIn(user.available)
+    setAppliedLeave(user.leave)
+  }, [user])  
 
   const handlePunch = () => {
     user.available = !punchIn;
@@ -24,11 +27,13 @@ const PunchCard: React.FC = () => {
   };
 
   const handleLeave = () => {
-    user.available = appliedLeave;
-    user.leave = !appliedLeave;
+    user.available = false;
+    user.leave = true;
+    setPunchIn(false)
     setAppliedLeave(true);
+    dispatch(login(user))
     updateEmployees(employees, user, dispatch);
-  };
+  };  
 
   return (
     <div className="PunchCard-wrapper">
@@ -40,7 +45,7 @@ const PunchCard: React.FC = () => {
           onClick={handlePunch}
           disabled={appliedLeave}
         >
-          Punch {!punchIn ? "In" : "Out"}
+          Punch {punchIn ? "Out" : "In"}
         </button>
         <button
           className="leave-btn button"
