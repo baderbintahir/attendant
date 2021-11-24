@@ -1,6 +1,7 @@
 import * as React from "react";
 import EmployeeContainer from "../../containers/EmployeeContainer/EmployeeContainer";
 import NavBar from "../NavBar/NavBar";
+import { CloseOutlined } from "@ant-design/icons";
 import "./AdminDashboard.css";
 
 const AdminDashboard: React.FC = () => {
@@ -33,6 +34,11 @@ const AdminDashboard: React.FC = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
+          {search && (
+            <span className="clear-search" onClick={() => setSearch("")}>
+              <CloseOutlined />
+            </span>
+          )}
         </div>
       </div>
       <div className="tabs">

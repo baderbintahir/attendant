@@ -10,7 +10,8 @@
 
 .Table ul {
   width: fit-content;
-  margin: 2rem 1rem;
+  /* margin: 2rem 1rem; */
+  margin: 2rem 1rem 2rem auto;
 }
 
 .ant-pagination-item-link,
@@ -24,6 +25,10 @@
 .ant-pagination-item-active a {
   color: #1985ea !important;
   font-weight: 700;
+}
+
+.ant-notification-notice-close:hover {
+  color: rgba(255, 255, 255, 0.67);
 }
 
 h1 {
@@ -64,4 +69,9 @@ td {
   border-radius: 3px;
   border: none;
   cursor: pointer;
+}
+
+.no-record {
+  text-align: center;
+  padding: 15%;
 }

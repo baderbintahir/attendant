@@ -1,6 +1,6 @@
 import { EmployeeType } from "../types/employees";
 
-const TOKEN = "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";
+const TOKEN = "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";
 const GIST_ID = "43df1d70eab985ccd41cd877f2bc8081";
 const GIST_FILENAME = "db.json";
 

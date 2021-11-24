@@ -4,6 +4,7 @@ import NewEmployeeForm from "../NewEmployeeForm/NewEmployeeForm";
 import { Pagination } from "antd";
 import "./EmployeeList.css";
 import { useNavigate } from "react-router";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 type Prop = {
   heading: string;
@@ -26,6 +27,7 @@ const EmployeeList = (props: Prop) => {
       props.employees.slice((currentPage - 1) * 10, currentPage * 10)
     );
   }, [currentPage, props.employees]);
+  console.log(currentList.length);
 
   return (
     <div className="Table">
@@ -76,31 +78,39 @@ const EmployeeList = (props: Prop) => {
         </thead>
 
         <tbody>
-          {currentList.map((employee: EmployeeType, index: number) => (
-            <tr key={index}>
-              <td>{employee.firstName}</td>
-              <td>{employee.lastName}</td>
-              <td>{employee.email}</td>
-              <td>{employee.pin}</td>
-              <td>{employee.department}</td>
-              <td>{employee.role}</td>
-              {props.handleSubmit && (
-                <td className="action-btns">
-                  <button
-                    onClick={() => {
-                      setShowForm(true);
-                      setEmployee(employee);
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button onClick={() => props.handleDelete(employee)}>
-                    Delete
-                  </button>
-                </td>
-              )}
+          {currentList.length ? (
+            currentList.map((employee: EmployeeType, index: number) => (
+              <tr key={index}>
+                <td>{employee.firstName}</td>
+                <td>{employee.lastName}</td>
+                <td>{employee.email}</td>
+                <td>{employee.pin}</td>
+                <td>{employee.department}</td>
+                <td>{employee.role}</td>
+                {props.handleSubmit && (
+                  <td className="action-btns">
+                    <button
+                      onClick={() => {
+                        setShowForm(true);
+                        setEmployee(employee);
+                      }}
+                    >
+                      <EditOutlined />
+                    </button>
+                    <button onClick={() => props.handleDelete(employee)}>
+                      <DeleteOutlined />
+                    </button>
+                  </td>
+                )}
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={6} className="no-record">
+                No records found for this query.
+              </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
       <Pagination
