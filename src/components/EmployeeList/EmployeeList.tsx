@@ -5,6 +5,9 @@ import { Pagination } from "antd";
 import "./EmployeeList.css";
 import { useNavigate } from "react-router";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { useSliceEmployees } from "../../shared/utils";
+
+
 
 type Prop = {
   heading: string;
@@ -18,16 +21,7 @@ const EmployeeList = (props: Prop) => {
   const [showForm, setShowForm] = React.useState(false);
   const [employee, setEmployee] = React.useState({});
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [currentList, setCurrentList] = React.useState(
-    props.employees.slice(0, 10)
-  );
-
-  React.useEffect(() => {
-    setCurrentList(
-      props.employees.slice((currentPage - 1) * 10, currentPage * 10)
-    );
-  }, [currentPage, props.employees]);
-  console.log(currentList.length);
+  const currentList = useSliceEmployees(props.employees, currentPage);
 
   return (
     <div className="Table">
