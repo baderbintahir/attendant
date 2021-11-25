@@ -39,7 +39,7 @@ const PunchCard: React.FC = () => {
     <div className="PunchCard-wrapper">
       <NavBar />
       <div className="punch-card">
-        <h1>Punch Card</h1>
+        <h1 className="title">Punch Card</h1>
         <button
           className="in-out-btn button"
           onClick={handlePunch}

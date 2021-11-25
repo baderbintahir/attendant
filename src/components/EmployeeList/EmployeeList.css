@@ -10,7 +10,6 @@
 
 .Table ul {
   width: fit-content;
-  /* margin: 2rem 1rem; */
   margin: 2rem 1rem 2rem auto;
 }
 
@@ -22,7 +21,7 @@
   background-color: #1e1e1e !important;
 }
 
-.ant-pagination-item-active a {
+li.ant-pagination-item-active a {
   color: #1985ea !important;
   font-weight: 700;
 }
@@ -31,10 +30,11 @@
   color: rgba(255, 255, 255, 0.67);
 }
 
-h1 {
-  margin: 1rem !important;
-  color: inherit !important;
-  font-weight: 600 !important;
+.title {
+  margin: 1rem;
+  color: inherit;
+  font-weight: 600;
+  font-family: sans-serif;
 }
 
 table.EmployeeList {
@@ -69,6 +69,14 @@ td {
   border-radius: 3px;
   border: none;
   cursor: pointer;
+}
+
+
+.action-btns button:disabled, .button:disabled {
+  color: #606060;
+  border: none;
+  cursor: not-allowed;
+  background: #151515;
 }
 
 .no-record {

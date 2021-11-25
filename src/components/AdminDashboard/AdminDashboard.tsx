@@ -1,7 +1,7 @@
 import * as React from "react";
+import { CloseOutlined } from "@ant-design/icons";
 import EmployeeContainer from "../../containers/EmployeeContainer/EmployeeContainer";
 import NavBar from "../NavBar/NavBar";
-import { CloseOutlined } from "@ant-design/icons";
 import "./AdminDashboard.css";
 
 const AdminDashboard: React.FC = () => {
@@ -15,13 +15,13 @@ const AdminDashboard: React.FC = () => {
       <div className="tabs-header">
         <div className="tab-btns">
           {employeeTypes.map((type, index) => (
-            <button
+            <span
               key={index}
               onClick={() => setActiveTab(type)}
-              className={type === activeTab ? "active" : null}
+              className={`tab-head ${type === activeTab ? "active" : null}`}
             >
               {type} Employees
-            </button>
+            </span>
           ))}
         </div>
 

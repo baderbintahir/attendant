@@ -1,5 +1,10 @@
 import { EmployeeType } from "../types/employees";
-import { GET_EMPLOYEES, SET_EMPLOYEE, LOGIN, LOGOUT } from "../constants/actionTypes";
+import {
+  GET_EMPLOYEES,
+  SET_EMPLOYEE,
+  LOGIN,
+  LOGOUT,
+} from "../constants/actionTypes";
 
 export const getEmployees = (employees: Array<EmployeeType>) => ({
   type: GET_EMPLOYEES,
@@ -17,5 +22,5 @@ export const login = (employee: EmployeeType) => ({
 });
 
 export const logout = () => ({
-  type: LOGOUT
+  type: LOGOUT,
 });

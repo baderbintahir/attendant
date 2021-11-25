@@ -4,9 +4,9 @@ import { v4 as uuidv4 } from "uuid";
 import { notification } from "antd";
 import { setData } from "../../api";
 import { setEmployees } from "../../actions/employees";
-import EmployeeList from "../EmployeeList/EmployeeList";
 import { EmployeeType } from "../../types/employees";
 import { updateEmployees } from "../../shared/utils";
+import EmployeeList from "../EmployeeList/EmployeeList";
 
 const CRUDEmployeeList: React.FC = () => {
   const dispatch = useDispatch();

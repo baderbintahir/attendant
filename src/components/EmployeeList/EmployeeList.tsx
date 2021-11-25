@@ -1,13 +1,11 @@
 import * as React from "react";
-import { EmployeeType } from "../../types/employees";
-import NewEmployeeForm from "../NewEmployeeForm/NewEmployeeForm";
-import { Pagination } from "antd";
-import "./EmployeeList.css";
 import { useNavigate } from "react-router";
+import { Pagination } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EmployeeType } from "../../types/employees";
 import { useSliceEmployees } from "../../shared/utils";
-
-
+import NewEmployeeForm from "../NewEmployeeForm/NewEmployeeForm";
+import "./EmployeeList.css";
 
 type Prop = {
   heading: string;
@@ -26,7 +24,7 @@ const EmployeeList = (props: Prop) => {
   return (
     <div className="Table">
       <div className="wrapper-header">
-        <h1 className="table-title">{props.heading}</h1>
+        <h1 className="title">{props.heading}</h1>
         {props.handleSubmit ? (
           <button
             className="add-employee-btn"

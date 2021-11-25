@@ -6,30 +6,28 @@
 .tabs-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   border-bottom: 1px solid #b3b3b3;
 }
 
-.tab-btns button {
+.tab-head {
   background: inherit;
   color: #fdfdfd;
   font-size: 0.9rem;
-  border: none;
   padding: 1rem 2rem;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 
-.tab-btns button:hover {
+.tab-head:hover {
   background-color: rgba(255, 255, 255, 0.08);
   text-decoration: none;
   cursor: pointer;
   color: #fdfdfd;
-  border: none;
 }
 
 .active {
   font-weight: 600;
-  border-bottom: 2px solid !important;
+  border-bottom: 2px solid;
 }
 
 input#search-field,
